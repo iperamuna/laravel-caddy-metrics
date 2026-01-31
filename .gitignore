@@ -1,5 +1,4 @@
 /vendor
-/bin/caddy-metrics-collector*
 .env
 .idea
 .vscode
@@ -10,7 +9,3 @@ npm-debug.log
 yarn-error.log
 public/storage
 storage/*.key
-/bin/caddy-metrics-collector
-/bin/caddy-metrics-collector-linux-amd64
-/bin/caddy-metrics-collector-darwin-amd64
-/bin/caddy-metrics-collector-darwin-arm64

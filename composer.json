@@ -22,6 +22,7 @@
     "require": {
         "php": "^8.1",
         "illuminate/support": "^10.0|^11.0|^12.0",
+        "laravel/prompts": "^0.3.11",
         "livewire/livewire": "^3.0|^4.0"
     },
     "require-dev": {
@@ -40,14 +41,14 @@
     },
     "scripts": {
         "build:go": [
-            "cd bin && go build -o caddy-metrics-collector ../src/Collector/main.go"
+            "cd src/Collector && go build -ldflags=\"-s -w\" -o ../../bin/caddy-metrics-collector main.go"
         ],
         "build:go-linux": [
-            "cd bin && GOOS=linux GOARCH=amd64 go build -o caddy-metrics-collector-linux-amd64 ../src/Collector/main.go"
+            "cd src/Collector && GOOS=linux GOARCH=amd64 go build -ldflags=\"-s -w\" -o ../../bin/caddy-metrics-collector-linux-amd64 main.go"
         ],
         "build:go-darwin": [
-            "cd bin && GOOS=darwin GOARCH=amd64 go build -o caddy-metrics-collector-darwin-amd64 ../src/Collector/main.go",
-            "cd bin && GOOS=darwin GOARCH=arm64 go build -o caddy-metrics-collector-darwin-arm64 ../src/Collector/main.go"
+            "cd src/Collector && GOOS=darwin GOARCH=amd64 go build -ldflags=\"-s -w\" -o ../../bin/caddy-metrics-collector-darwin-amd64 main.go",
+            "cd src/Collector && GOOS=darwin GOARCH=arm64 go build -ldflags=\"-s -w\" -o ../../bin/caddy-metrics-collector-darwin-arm64 main.go"
         ],
         "build:all": [
             "@build:go-linux",
