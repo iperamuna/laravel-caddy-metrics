@@ -1,0 +1,16 @@
+/vendor
+/bin/caddy-metrics-collector*
+.env
+.idea
+.vscode
+composer.lock
+phpunit.result.cache
+node_modules
+npm-debug.log
+yarn-error.log
+public/storage
+storage/*.key
+/bin/caddy-metrics-collector
+/bin/caddy-metrics-collector-linux-amd64
+/bin/caddy-metrics-collector-darwin-amd64
+/bin/caddy-metrics-collector-darwin-arm64
