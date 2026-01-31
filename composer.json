@@ -44,7 +44,8 @@
             "cd src/Collector && go build -ldflags=\"-s -w\" -o ../../bin/caddy-metrics-collector main.go"
         ],
         "build:go-linux": [
-            "cd src/Collector && GOOS=linux GOARCH=amd64 go build -ldflags=\"-s -w\" -o ../../bin/caddy-metrics-collector-linux-amd64 main.go"
+            "cd src/Collector && GOOS=linux GOARCH=amd64 go build -ldflags=\"-s -w\" -o ../../bin/caddy-metrics-collector-linux-amd64 main.go",
+            "cd src/Collector && GOOS=linux GOARCH=arm64 go build -ldflags=\"-s -w\" -o ../../bin/caddy-metrics-collector-linux-arm64 main.go"
         ],
         "build:go-darwin": [
             "cd src/Collector && GOOS=darwin GOARCH=amd64 go build -ldflags=\"-s -w\" -o ../../bin/caddy-metrics-collector-darwin-amd64 main.go",
