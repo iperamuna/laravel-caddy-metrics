@@ -26,19 +26,19 @@ cd "$COLLECTOR_DIR"
 
 # Build for Linux AMD64
 echo "📦 Building for Linux (amd64)..."
-GOOS=linux GOARCH=amd64 go build -o "$BIN_DIR/caddy-metrics-collector-linux-amd64" main.go
+GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o "$BIN_DIR/caddy-metrics-collector-linux-amd64" main.go
 
 # Build for Linux ARM64
 echo "📦 Building for Linux (arm64)..."
-GOOS=linux GOARCH=arm64 go build -o "$BIN_DIR/caddy-metrics-collector-linux-arm64" main.go
+GOOS=linux GOARCH=arm64 go build -ldflags="-s -w" -o "$BIN_DIR/caddy-metrics-collector-linux-arm64" main.go
 
 # Build for macOS AMD64
 echo "📦 Building for macOS (amd64)..."
-GOOS=darwin GOARCH=amd64 go build -o "$BIN_DIR/caddy-metrics-collector-darwin-amd64" main.go
+GOOS=darwin GOARCH=amd64 go build -ldflags="-s -w" -o "$BIN_DIR/caddy-metrics-collector-darwin-amd64" main.go
 
 # Build for macOS ARM64 (Apple Silicon)
 echo "📦 Building for macOS (arm64/Apple Silicon)..."
-GOOS=darwin GOARCH=arm64 go build -o "$BIN_DIR/caddy-metrics-collector-darwin-arm64" main.go
+GOOS=darwin GOARCH=arm64 go build -ldflags="-s -w" -o "$BIN_DIR/caddy-metrics-collector-darwin-arm64" main.go
 
 # Make binaries executable
 chmod +x "$BIN_DIR"/caddy-metrics-collector-*
