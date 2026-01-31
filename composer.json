@@ -1,0 +1,72 @@
+{
+    "name": "iperamuna/laravel-caddy-metrics",
+    "description": "A Laravel package for visualizing Caddy server metrics with a beautiful dashboard",
+    "keywords": [
+        "laravel",
+        "caddy",
+        "metrics",
+        "monitoring",
+        "dashboard",
+        "prometheus"
+    ],
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Indunil Peramuna",
+            "email": "iperamuna@gmail.com",
+            "homepage": "https://iperamuna.online"
+        }
+    ],
+    "homepage": "https://github.com/iperamuna/laravel-caddy-metrics",
+    "require": {
+        "php": "^8.1",
+        "illuminate/support": "^10.0|^11.0|^12.0",
+        "livewire/livewire": "^3.0|^4.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^8.0|^9.0",
+        "pestphp/pest": "^4.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Iperamuna\\CaddyMetrics\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Iperamuna\\CaddyMetrics\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "build:go": [
+            "cd bin && go build -o caddy-metrics-collector ../src/Collector/main.go"
+        ],
+        "build:go-linux": [
+            "cd bin && GOOS=linux GOARCH=amd64 go build -o caddy-metrics-collector-linux-amd64 ../src/Collector/main.go"
+        ],
+        "build:go-darwin": [
+            "cd bin && GOOS=darwin GOARCH=amd64 go build -o caddy-metrics-collector-darwin-amd64 ../src/Collector/main.go",
+            "cd bin && GOOS=darwin GOARCH=arm64 go build -o caddy-metrics-collector-darwin-arm64 ../src/Collector/main.go"
+        ],
+        "build:all": [
+            "@build:go-linux",
+            "@build:go-darwin"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Iperamuna\\CaddyMetrics\\CaddyMetricsServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
