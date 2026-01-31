@@ -1,0 +1,25 @@
+[Unit]
+Description=Caddy Metrics Collector Daemon
+After=network.target caddy.service
+
+[Service]
+# User that runs the service
+User={{USER}}
+Group={{GROUP}}
+
+# Command to run the collector
+ExecStart={{BINARY_PATH}} \
+    -url "{{METRICS_URL}}" \
+    -db "{{DB_PATH}}" \
+    -interval 15s \
+    -retention {{RETENTION_DAYS}}
+
+# Restart policy
+Restart=always
+RestartSec=5s
+
+# Working directory
+WorkingDirectory={{WORKING_DIR}}
+
+[Install]
+WantedBy=multi-user.target
