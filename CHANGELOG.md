@@ -4,6 +4,8 @@ All notable changes to `laravel-caddy-metrics` will be documented in this file.
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-01-31
+
 ### Added
 - **Interactive Thread Simulator**: Real-time simulation of thread configuration using a Safety Margin slider.
 - **Dynamic Thread Advising**: Smart logic to calculate `suggested_threads` based on average usage and peak bursts.
