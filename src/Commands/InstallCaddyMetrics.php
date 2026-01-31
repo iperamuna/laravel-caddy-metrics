@@ -4,6 +4,7 @@ namespace Iperamuna\CaddyMetrics\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\ServiceProvider;
 use function Laravel\Prompts\text;
 use function Laravel\Prompts\info;
 use function Laravel\Prompts\warning;
@@ -192,6 +193,8 @@ class InstallCaddyMetrics extends Command
             note("Service loaded! Check logs at $logPath/caddy-metrics.log");
         }
 
+        $this->installServiceProvider();
+
         info('Installation complete!');
         return self::SUCCESS;
     }
@@ -229,6 +232,8 @@ class InstallCaddyMetrics extends Command
             $this->runSystemCommand('systemctl start caddy-metrics');
             $this->runSystemCommand('systemctl status caddy-metrics --no-pager');
         }
+
+        $this->installServiceProvider();
 
         info('Installation complete!');
         return self::SUCCESS;
@@ -299,5 +304,17 @@ class InstallCaddyMetrics extends Command
         }
 
         File::put($envPath, $content);
+    }
+
+    private function installServiceProvider(): void
+    {
+        $this->call('vendor:publish', [
+            '--tag' => 'caddy-metrics-provider',
+        ]);
+
+        if (file_exists(base_path('bootstrap/providers.php')) && method_exists(ServiceProvider::class, 'addProviderToBootstrapFile')) {
+            ServiceProvider::addProviderToBootstrapFile('App\Providers\CaddyMetricsServiceProvider');
+            note('Registered CaddyMetricsServiceProvider in bootstrap/providers.php');
+        }
     }
 }

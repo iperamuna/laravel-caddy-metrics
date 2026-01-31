@@ -46,8 +46,11 @@ php artisan vendor:publish --tag=caddy-metrics-views
 ```
 
 ### 3. Install the collector service
-
-The collector is a small Go binary that polls Caddy and stores metrics in SQLite.
+The installer handles everything for you:
+- Installs the Go collector binary
+- Creates the systemd (Linux) or launchd (macOS) service
+- Publishes the `CaddyMetricsServiceProvider` for access control
+- Registers the provider in `bootstrap/providers.php`
 
 ```bash
 # Linux (requires sudo)
@@ -56,6 +59,30 @@ sudo php artisan caddy-metrics:install
 # macOS
 php artisan caddy-metrics:install
 ```
+
+### 4. Dashboard Authorization
+
+To control who can access the Caddy Metrics dashboard in production, you must configure the `viewCaddyMetrics` gate in your `app/Providers/CaddyMetricsServiceProvider.php` file (created during installation).
+
+```php
+/**
+ * Register the Caddy Metrics gate.
+ *
+ * This gate determines who can access Caddy Metrics in non-local environments.
+ *
+ * @return void
+ */
+protected function gate()
+{
+    Gate::define('viewCaddyMetrics', function ($user) {
+        return in_array($user->email, [
+            'taylor@laravel.com',
+        ]);
+    });
+}
+```
+
+By default, the dashboard is only accessible in the `local` environment.
 
 ## Configuration
 

@@ -37,6 +37,11 @@ class CaddyMetricsServiceProvider extends ServiceProvider
             __DIR__ . '/../resources/stubs' => resource_path('stubs/vendor/caddy-metrics'),
         ], 'caddy-metrics-stubs');
 
+        // Publish Application Service Provider
+        $this->publishes([
+            __DIR__ . '/CaddyMetricsApplicationServiceProvider.php' => app_path('Providers/CaddyMetricsServiceProvider.php'),
+        ], 'caddy-metrics-provider');
+
         // Publish Go collector binary
         $this->publishes([
             __DIR__ . '/../bin' => base_path('caddy-metrics'),
@@ -72,7 +77,13 @@ class CaddyMetricsServiceProvider extends ServiceProvider
             return;
         }
 
-        Route::middleware(config('caddy-metrics.middleware', ['web']))
+        $middleware = config('caddy-metrics.middleware', ['web']);
+        if (is_string($middleware)) {
+            $middleware = [$middleware];
+        }
+        $middleware[] = \Iperamuna\CaddyMetrics\Http\Middleware\Authenticate::class;
+
+        Route::middleware($middleware)
             ->group(function () {
                 Route::get(config('caddy-metrics.dashboard_url', '/caddy/metrics'), [CaddyMetricsController::class, 'index'])
                     ->name('caddy-metrics.index');
