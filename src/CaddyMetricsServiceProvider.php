@@ -9,6 +9,7 @@ use Iperamuna\CaddyMetrics\Commands\InstallCaddyMetrics;
 use Iperamuna\CaddyMetrics\Commands\MaintainCaddyMetrics;
 use Iperamuna\CaddyMetrics\Commands\GenerateCaddyMetrics;
 use Iperamuna\CaddyMetrics\Commands\ClearCaddyMetrics;
+use Iperamuna\CaddyMetrics\Commands\ConfigureCaddyMetrics;
 use Iperamuna\CaddyMetrics\Livewire\CaddyMetricsComponent;
 use Iperamuna\CaddyMetrics\Livewire\ThreadAdvisorComponent;
 use Iperamuna\CaddyMetrics\Http\Controllers\CaddyMetricsController;
@@ -61,6 +62,7 @@ class CaddyMetricsServiceProvider extends ServiceProvider
                 MaintainCaddyMetrics::class,
                 GenerateCaddyMetrics::class,
                 ClearCaddyMetrics::class,
+                ConfigureCaddyMetrics::class,
             ]);
         }
 

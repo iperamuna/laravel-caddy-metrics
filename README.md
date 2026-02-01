@@ -60,6 +60,15 @@ sudo php artisan caddy-metrics:install
 php artisan caddy-metrics:install
 ```
 
+### 3a. Configure Remote Servers
+On remote servers where you cannot run the full installer or need to manage settings via environment variables, use the configuration command:
+
+```bash
+php artisan caddy-metrics:configure
+```
+
+This interactive command will help you set up your `.env` file with the correct ports, URLs, and paths for Caddy metrics. You can run it with `--no-interaction` in deployment scripts as long as your environment variables are already set.
+
 ### 4. Dashboard Authorization
 
 To control who can access the Caddy Metrics dashboard in production, you must configure the `viewCaddyMetrics` gate in your `app/Providers/CaddyMetricsServiceProvider.php` file (created during installation).
@@ -111,6 +120,7 @@ The dashboard includes a dedicated **Thread Advisor** that analyzes your server'
 | Command | Description |
 |---------|-------------|
 | `caddy-metrics:install` | Interactive installer for the collector service |
+| `caddy-metrics:configure` | Helper for configuring `.env` variables on remote servers |
 | `caddy-metrics:maintain` | Manage service (start/stop/restart/status/enable/disable) |
 | `caddy-metrics:generate` | Generate scenario-based dummy data (Optimal, High Load, Spikes, etc.) |
 | `caddy-metrics:clear` | Wipe all metrics data from the database (includes `--force`) |

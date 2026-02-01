@@ -4,6 +4,13 @@ All notable changes to `laravel-caddy-metrics` will be documented in this file.
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-02-01
+
+### Added
+- **New Command: `caddy-metrics:configure`**: A helper command to easily configure `.env` variables for remote servers without needing to run the full installer.
+- **Remote Server Support**: Improved documentation and tooling for deploying metrics to non-interactive remote environments.
+- **Environment Variable Detection**: The configure command automatically detects and respects existing environment variables.
+
 ## [1.0.0] - 2026-01-31
 
 ### Added
